@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'talkshowProject.urls'
+ROOT_URLCONF = 'talkShowProject.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'talkshowProject.wsgi.application'
+WSGI_APPLICATION = 'talkShowProject.wsgi.application'
 
 
 # Database
