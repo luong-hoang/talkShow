@@ -1,0 +1,10 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'talkShow/css/bootstrap.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'talkShow/style.css' %}" />
+
+<span class="text-primary">This will show all talk show</span>
+<ul>
+    {% for talk_show in data %}
+        <li>{{talk_show}}</li>
+    {% endfor %}
+</ul>

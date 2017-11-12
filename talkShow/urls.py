@@ -3,5 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$', views.index, name='index')
+    url(r'^index', views.index, name='login'),
+    url(r'^$', views.time_line, name='time_line'),
 ]
