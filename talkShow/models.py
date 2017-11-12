@@ -1,4 +1,5 @@
 from django.db import models
+from .tools import Tools
 
 
 # Create your models here.
@@ -7,6 +8,11 @@ class User(models.Model):
     email = models.EmailField(max_length=100, unique=True)
     password = models.CharField(max_length=255)
     super = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        self.password = Tools.md5(self.password)
+        super(User, self).save()
 
     def __str__(self):
         return self.email
