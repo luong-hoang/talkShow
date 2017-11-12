@@ -24,7 +24,7 @@ class Subject(models.Model):
     date_added = models.DateTimeField()
     date_modified = models.DateTimeField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    talk_show_id = models.ForeignKey(TalkShow, on_delete=models.CASCADE, blank=True)
+    talk_show_id = models.ForeignKey(TalkShow, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.subject
