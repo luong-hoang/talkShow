@@ -13,7 +13,7 @@ class User(models.Model):
 
 
 class TalkShow(models.Model):
-    date = models.DateTimeField()
+    date = models.DateField()
 
     def __str__(self):
         return self.date
