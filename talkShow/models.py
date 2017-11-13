@@ -10,6 +10,7 @@ class User(models.Model):
     super = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
 
+    # Encrypt password in database
     def save(self, *args, **kwargs):
         self.password = Tools.md5(self.password)
         super(User, self).save()
