@@ -44,6 +44,11 @@ def login(request):
         return render(request, 'talkShow/login.html')
 
 
+def logout(request):
+    request.session.flush()
+    return HttpResponseRedirect(reverse('talkShow:login'))
+
+
 def time_line(request):
     user_id = logged(request)
     if user_id:

@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^$', views.time_line, name='time_line'),
     url(r'^talked', views.time_line, name='time_line'),
     url(r'^login', views.login, name='login'),
+    url(r'^logout', views.logout, name='logout'),
 ]
