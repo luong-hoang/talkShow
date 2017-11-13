@@ -1,13 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from .models import User, TalkShow, Subject, TalkShowSubject
 from .tools import Tools
-
-USER_ID = 'user_id'
-EMAIL = 'email'
-PASSWORD = 'password'
+from .decorators import login_required
+from .constants import *
 
 
 # Create your views here.
@@ -19,8 +17,8 @@ def login(request):
     # Handle login: POST
     if request.method == 'POST':
         try:
-            email = request.POST[EMAIL].strip()
-            password = request.POST[PASSWORD]
+            email = request.POST['email'].strip()
+            password = request.POST['password']
             if email == '' or password.strip() == '':
                 return render(request, 'talkShow/login.html', {'error': 'Please fill in all fields.'})
             user = User.objects.get(email=email)
@@ -37,7 +35,7 @@ def login(request):
                 return HttpResponseRedirect(reverse('talkShow:time_line'))
 
     # Handle get page: GET
-    user_id = logged(request)
+    user_id = int(request.session.get(USER_ID, 0))
     if user_id:
         return HttpResponseRedirect(reverse('talkShow:time_line'))
     else:
@@ -49,15 +47,15 @@ def logout(request):
     return HttpResponseRedirect(reverse('talkShow:login'))
 
 
-def time_line(request):
-    user_id = logged(request)
-    if user_id:
-        data = TalkShowSubject.objects.all()
-        return render(request, 'talkShow/time_line.html', {'data': data})
-    else:
-        return HttpResponseRedirect(reverse('talkShow:login'))
+@login_required
+def time_line(request, user_id):
+    data = TalkShowSubject.objects.all()
+    return render(request, 'talkShow/time_line.html', {'data': data})
 
 
-# Check session if user is logged
-def logged(request):
-    return int(request.session.get(USER_ID, 0))
+@login_required
+def my_subjects(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    return render(request, 'talkShow/my_subjects.html', {'subjects': user.subject_set.all()})
+
+

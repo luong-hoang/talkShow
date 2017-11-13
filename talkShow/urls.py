@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^talked', views.time_line, name='time_line'),
     url(r'^login', views.login, name='login'),
     url(r'^logout', views.logout, name='logout'),
+    url(r'^my-subjects', views.my_subjects, name='my_subjects'),
 ]
