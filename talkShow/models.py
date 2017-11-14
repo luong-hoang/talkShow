@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+
 from .tools import Tools
 
 
@@ -30,18 +32,28 @@ class Subject(models.Model):
     subject = models.CharField(max_length=255)
     date_added = models.DateTimeField()
     date_modified = models.DateTimeField()
-    user_id = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+
+    def talked(self):
+        if self.talkshowsubject_set.count() > 0:
+            return True
+        else:
+            return False
+
+    def save(self, *args, **kwargs):
+        self.date_modified = timezone.now()
+        super(Subject, self).save()
 
     def __str__(self):
         return self.subject
 
 
 class TalkShowSubject(models.Model):
-    talk_show_id = models.ForeignKey(TalkShow, on_delete=models.DO_NOTHING)
-    subject_id = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)
-    user_id = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    talk_show = models.ForeignKey(TalkShow, on_delete=models.DO_NOTHING)
+    subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return '%s: %s talked %s' % (str(self.talk_show_id.date), self.user_id.email, self.subject_id.subject)
+        return '%s: %s talked %s' % (str(self.talk_show.date), self.user.email, self.subject.subject)
 
 # Create your models here.
