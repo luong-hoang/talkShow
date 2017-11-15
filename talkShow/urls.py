@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^login', views.login, name='login'),
     url(r'^logout', views.logout, name='logout'),
     url(r'^my-subjects', views.my_subjects, name='my_subjects'),
+    url(r'^edit-subject', views.edit_subject, name='edit_subject'),
 ]

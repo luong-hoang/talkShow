@@ -1,0 +1,10 @@
+{% if subject.talked %}
+    <li class="text-danger">
+        {{subject}}
+    </li>
+{% else %}
+    <li class="text-success">
+        <a class="edit_subject" href="#">{{subject}}</a>
+        <input class="form-control change d-none" value="{{subject.subject}}" data-id="{{subject.id}}">
+    </li>
+{% endif %}

@@ -1,10 +1,25 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'talkShow/css/bootstrap.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'talkShow/style.css' %}" />
+<script type="text/javascript" src="{% static 'talkShow/js/jquery-3.2.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'talkShow/js/main.js' %}"></script>
 
+<div class="helper">
+    {% csrf_token %}
+    <input type="hidden" name="endpoint" value="{% url 'talkShow:edit_subject' %}">
+</div>
 <span class="text-primary">My subjects</span>
 <ul>
     {% for subject in subjects %}
-        <li>{{subject}}</li>
+        {% include './partials/subject_item.html' with subject=subject %}
     {% endfor %}
 </ul>
+
+{% if allow_add_new %}
+<div class="add_block">
+    <button type="button" class="edit_subject btn btn-default">Add subject for this week</button>
+    <input class="form-control change d-none" placeholder="New subject">
+</div>
+{% endif %}
+
+<span id="error" class="text-danger"></span>
