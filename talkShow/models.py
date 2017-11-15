@@ -12,10 +12,18 @@ class User(models.Model):
     super = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
 
+    # In any given moment, 1 user can has only 1 new subject
+    def can_add_more_subject(self):
+        subjects = self.subject_set.all()
+        for subject in subjects:
+            if not subject.talked():
+                return False
+        return True
+
     # Encrypt password in database
     def save(self, *args, **kwargs):
         self.password = Tools.md5(self.password)
-        super(User, self).save()
+        super(User, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.email
@@ -41,8 +49,10 @@ class Subject(models.Model):
             return False
 
     def save(self, *args, **kwargs):
+        # from django.core.exceptions import FieldError
+        # raise FieldError('Test exception')
         self.date_modified = timezone.now()
-        super(Subject, self).save()
+        super(Subject, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.subject
