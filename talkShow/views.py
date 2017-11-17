@@ -3,7 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http40
 from django.urls import reverse
 from django.utils import timezone
 from django.template.loader import render_to_string
-from django.db import IntegrityError, DatabaseError
+
+from django.db import IntegrityError, DatabaseError, connection
+from django.db.models import Max, Count
 
 from .models import User, TalkShow, Subject, TalkShowSubject
 from .tools import Tools
@@ -110,4 +112,49 @@ def edit_subject(request, user_id):
         raise Http404
 
 
+@login_required
+def statistics(request, user_id):
+    return render(request,
+                  'talkShow/statistics.html',
+                  {'presenters': _hottest_presenter(), 'authors': _hottest_author()})
+
+
+def _hottest_presenter():
+    user_ids = []
+    # Get all users and frequency of each
+    frequency = TalkShowSubject.objects.values('user').annotate(total=Count('user'))
+    # Get max occupation in above set
+    max_num = frequency.aggregate(max=Max('total'))['max']
+    # Filter all max value from frequency set
+    for user in frequency.filter(total=max_num):
+        user_ids.append(user['user'])
+
+    return User.objects.filter(pk__in=user_ids)
+
+
+def _hottest_author():
+    cursor = connection.cursor()
+    join_query = 'SELECT tss.`id`, tss.`subject_id`, s.`owner_id` ' \
+                      'FROM `talkShow_talkshowsubject` tss ' \
+                      'LEFT JOIN `talkShow_subject` s ON (tss.`subject_id` = s.`id`)'
+
+    frequency_query = 'SELECT `owner_id`, COUNT(`owner_id`) AS `total` ' \
+                      'FROM (' + join_query + ') ' \
+                      'GROUP BY `owner_id` ORDER BY `total` DESC'
+
+    max_query = 'SELECT MAX(`owner_id`) FROM (' + frequency_query + ') AS `dummy`'
+
+    # [(owner_id, frequency), ...]
+    frequency_result = cursor.execute(frequency_query).fetchall()
+    # [(max)]
+    max_result = cursor.execute(max_query).fetchall()
+
+    user_ids = []
+    if len(max_result) > 0 and len(frequency_result) > 0:
+        max_appear = max_result[0][0]
+        for frequency in frequency_result:
+            if frequency[1] == max_appear:
+                user_ids.append(frequency[0])
+
+    return User.objects.filter(pk__in=user_ids)
 
