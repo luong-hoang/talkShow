@@ -1,0 +1,17 @@
+Subjects for this week
+<ul>
+    {% for user in users %}
+        <li>
+            {{ user.display_name }}
+            {% if user.current_subject %}
+                <span>{{ user.current_subject.subject }}</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+{% if can_roll %}
+    <a href="#" class="btn btn-default">Roll x2</a>
+    <a href="#" class="btn btn-default">Roll x3</a>
+    <a href="#" class="btn btn-default">Roll x4</a>
+{% endif %}

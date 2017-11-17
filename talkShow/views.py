@@ -9,7 +9,7 @@ from django.db.models import Max, Count
 
 from .models import User, TalkShow, Subject, TalkShowSubject
 from .tools import Tools
-from .decorators import login_required
+from .decorators import login_required, admin_required
 from .constants import *
 
 
@@ -114,9 +114,35 @@ def edit_subject(request, user_id):
 
 @login_required
 def statistics(request, user_id):
-    return render(request,
-                  'talkShow/statistics.html',
-                  {'presenters': _hottest_presenter(), 'authors': _hottest_author()})
+    return render(request, 'talkShow/statistics.html', {'presenters': _hottest_presenter(), 'authors': _hottest_author()})
+
+
+@admin_required
+def subject_this_period(request, user):
+    users = _get_user_current_subject()
+    can_roll = _can_roll(users)
+    return render(request, 'talkShow/admin/subject_this_period.html', {'users': users, 'can_roll': can_roll})
+
+
+def _get_user_current_subject():
+    users = []
+    for user in User.objects.prefetch_related('subject_set').filter(active=True):
+        subject = user.subject_set.order_by('-id')[:1]
+        if len(subject) > 0 and not subject[0].talked():
+            user.current_subject = subject[0]
+        else:
+            user.current_subject = False
+        users.append(user)
+    return users
+
+
+def _can_roll(users):
+    if not users:
+        users = _get_user_current_subject()
+    for user in users:
+        if not user.current_subject:
+            return False
+    return True
 
 
 def _hottest_presenter():
