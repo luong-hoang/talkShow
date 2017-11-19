@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 
 from django.db import IntegrityError, DatabaseError, connection
 from django.db.models import Max, Count
+from datetime import datetime
 
 from .models import User, TalkShow, Subject, TalkShowSubject
 from .tools import Tools
@@ -118,10 +119,64 @@ def statistics(request, user_id):
 
 
 @admin_required
-def subject_this_period(request, user):
+def overview(request, user):
     users = _get_user_current_subject()
-    can_roll = _can_roll(users)
-    return render(request, 'talkShow/admin/subject_this_period.html', {'users': users, 'can_roll': can_roll})
+    can_match = _can_match(users)
+
+    if request.method == 'POST':
+        date = request.POST.get('date', '')
+        presenters = request.POST.getlist('user[]')
+        subjects = request.POST.getlist('subject[]')
+        # Input Validation
+        if not can_match or date == '' or Tools.list_duplicated(presenters) or Tools.list_duplicated(subjects):
+            return render(request, 'talkShow/admin/overview.html',
+                          {'users': users, 'can_match': can_match, 'error': 'Please check your input'})
+
+        # Logic validation
+        date = datetime.date(datetime.strptime(date, '%Y-%m-%d'))
+        today = datetime.date(datetime.now())
+        if date < today:
+            # Cannot match a talk in the past
+            return render(request, 'talkShow/admin/overview.html',
+                          {'users': users, 'can_match': can_match, 'error': 'You cannot change talk show in the past'})
+        talk_show_subjects = []
+        for i in range(len(presenters)):
+            presenter_id = int(presenters[i])
+            subject_id = int(subjects[i])
+            if presenter_id == 0 or subject_id == 0:
+                continue
+            try:
+                User.objects.get(pk=presenter_id)
+                Subject.objects.get(pk=subject_id)
+            except (User.DoesNotExist, Subject.DoesNotExist):
+                return render(request, 'talkShow/admin/overview.html',
+                              {'users': users, 'can_match': can_match, 'error': 'User or subject not found'})
+            talk_show_subjects.append((presenter_id, subject_id))
+
+        # Populate database
+        try:
+            talk_show = TalkShow.objects.get(date=date)
+        except TalkShow.DoesNotExist:
+            talk_show = TalkShow()
+            talk_show.date = date
+            talk_show.save()
+        for item in talk_show_subjects:
+            talk_show_subject = TalkShowSubject()
+            talk_show_subject.talk_show = talk_show
+            talk_show_subject.user = User.objects.get(pk=item[0])
+            talk_show_subject.subject = Subject.objects.get(pk=item[1])
+            talk_show_subject.save()
+
+        # Redirect after save
+        return HttpResponseRedirect(reverse('talkShow:time_line'))
+
+    return render(request, 'talkShow/admin/overview.html', {'users': users, 'can_match': can_match})
+
+
+#@admin_required
+#def auto_roll(request, user, roll_number):
+#    available_subjects = Subject.objects.filter(talkshowsubject=None)
+#    return HttpResponse(roll_number)
 
 
 def _get_user_current_subject():
@@ -136,7 +191,7 @@ def _get_user_current_subject():
     return users
 
 
-def _can_roll(users):
+def _can_match(users):
     if not users:
         users = _get_user_current_subject()
     for user in users:

@@ -1,0 +1,95 @@
+<!--{#%debug%}-->
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'talkShow/css/bootstrap.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'talkShow/style.css' %}" />
+<script type="text/javascript" src="{% static 'talkShow/js/jquery-3.2.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'talkShow/js/main.js' %}"></script>
+
+
+Subjects for this week
+<ul>
+    {% for user in users %}
+        <li>
+            {{ user.display_name }}
+            {% if user.current_subject %}
+                <span>{{ user.current_subject.subject }}</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+{{error}}
+
+{% if can_match %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="date" placeholder="Datetime picker">
+        <div class="col-4">
+            <div>
+                <label for="user_x2">Presenter</label>
+                <select id="user_x2" name="user[]">
+                    <option value="0">Select</option>
+                    {% for user in users %}
+                    <option value="{{user.id}}">{{user.display_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="subject_x2">Subject</label>
+                <select id="subject_x2" name="subject[]">
+                    <option value="0">Select</option>
+                    {% for user in users %}
+                    <option value="{{user.current_subject.id}}">{{user.current_subject.subject}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div>
+                <label for="user_x3">Presenter</label>
+                <select id="user_x3" name="user[]">
+                    <option value="0">Select</option>
+                    {% for user in users %}
+                    <option value="{{user.id}}">{{user.display_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="subject_x3">Subject</label>
+                <select id="subject_x3" name="subject[]">
+                    <option value="0">Select</option>
+                    {% for user in users %}
+                    <option value="{{user.current_subject.id}}">{{user.current_subject.subject}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div>
+                <label for="user_x4">Presenter</label>
+                <select id="user_x4" name="user[]">
+                    <option value="0">Select</option>
+                    {% for user in users %}
+                    <option value="{{user.id}}">{{user.display_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="subject_x4">Subject</label>
+                <select id="subject_x4" name="subject[]">
+                    <option value="0">Select</option>
+                    {% for user in users %}
+                    <option value="{{user.current_subject.id}}">{{user.current_subject.subject}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Match</button>
+    </form>
+{% else %}
+    All users must have their own subjects before make a match.
+{% endif %}

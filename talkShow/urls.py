@@ -12,5 +12,5 @@ urlpatterns = [
     url(r'^edit-subject', views.edit_subject, name='edit_subject'),
     url(r'^statistics', views.statistics, name='statistics'),
     # Admin
-    url(r'^overview', views.subject_this_period, name='overview'),
+    url(r'^overview', views.overview, name='overview'),
 ]
