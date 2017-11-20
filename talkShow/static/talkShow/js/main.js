@@ -77,4 +77,12 @@
         obj[key] = value;
         return obj;
     }
-})(jQuery)
+})(jQuery);
+
+
+// Overview page
+(function($) {
+    $(document).ready(function() {
+        $('#date').datepicker({});
+    });
+})(jQuery);

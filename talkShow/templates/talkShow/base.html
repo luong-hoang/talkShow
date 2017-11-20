@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'talkShow/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'talkShow/css/jquery-ui.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'talkShow/css/style.css' %}" />
+    <title>{% block title %}English TalkShow{% endblock %}</title>
+</head>
+
+<body>
+    {% block content %}{% endblock %}
+
+    {% block js %}
+        <script type="text/javascript" src="{% static 'talkShow/js/jquery-3.2.1.js' %}"></script>
+        <script type="text/javascript" src="{% static 'talkShow/js/jquery-ui.js' %}"></script>
+        <script type="text/javascript" src="{% static 'talkShow/js/main.js' %}"></script>
+    {% endblock %}
+</body>
+</html>
