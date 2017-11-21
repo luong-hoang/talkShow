@@ -23,10 +23,12 @@ class Tools:
         return False
 
     @staticmethod
-    def list_duplicated(li):
+    def list_duplicated(li, ignore_empty=True):
         length = len(li)
-        # 0 - len(li)
+        # 0 ---> len(li)
         for i in range(length):
+            if ignore_empty and int(li[i]) == 0:
+                continue
             checker = li[i]
             for j in range(i + 1, length):
                 if checker == li[j]:

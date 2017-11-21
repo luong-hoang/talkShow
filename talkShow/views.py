@@ -154,13 +154,20 @@ def overview(request, user):
             talk_show_subjects.append((presenter_id, subject_id))
 
         # Populate database
+        used_user = []
+        used_subject = []
         try:
             talk_show = TalkShow.objects.get(date=date)
+            for show in talk_show.talkshowsubject_set.all():
+                used_user.append(show.user.id)
+                used_subject.append(show.subject.id)
         except TalkShow.DoesNotExist:
             talk_show = TalkShow()
             talk_show.date = date
             talk_show.save()
         for item in talk_show_subjects:
+            if item[0] in used_user or item[1] in used_subject:
+                continue
             talk_show_subject = TalkShowSubject()
             talk_show_subject.talk_show = talk_show
             talk_show_subject.user = User.objects.get(pk=item[0])

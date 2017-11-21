@@ -17,76 +17,44 @@
     {% endfor %}
     </ul>
 
-    {{error}}
+    {% if error %}
+    <div class="alert alert-danger">{{error}}</div>
+    {% endif %}
 
     {% if can_match %}
-        <form method="post">
-            {% csrf_token %}
-            <div class="row form-group col-6">
-                <label for="date">Talk show date</label>
-                <input type="text" name="date" id="date" class="form-control">
-            </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row form-group col-5">
+            <label for="date">Talk show date:</label>
+            <input type="text" name="date" id="date" class="form-control">
+        </div>
 
-            <div class="row">
-                <div class="col-4">
-                    <div class="form-group">
-                        <select id="user_x2" name="user[]" class="form-control">
-                            <option value="0">--Presenter--</option>
-                            {% for user in users %}
-                            <option value="{{user.id}}">{{user.display_name}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select id="subject_x2" name="subject[]" class="form-control">
-                            <option value="0">--Subject--</option>
-                            {% for user in users %}
-                            <option value="{{user.current_subject.id}}">{{user.current_subject.subject}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+        <div class="row">
+            {% for match in "1234" %}
+            <div class="col-3">
+                <div class="form-group">
+                    <select id="user_x{{forloop.counter}}" name="user[]" class="form-control presenter">
+                        <option value="0">--Presenter--</option>
+                        {% for user in users %}
+                        <option value="{{user.id}}" class="presenter presenter_{{user.id}}">{{user.display_name}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-
-                <div class="col-4">
-                    <div class="form-group">
-                        <select id="user_x3" name="user[]" class="form-control">
-                            <option value="0">--Presenter--</option>
-                            {% for user in users %}
-                            <option value="{{user.id}}">{{user.display_name}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select id="subject_x3" name="subject[]" class="form-control">
-                            <option value="0">--Subject--</option>
-                            {% for user in users %}
-                            <option value="{{user.current_subject.id}}">{{user.current_subject.subject}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-4">
-                    <div class="form-group">
-                        <select id="user_x4" name="user[]" class="form-control">
-                            <option value="0">--Presenter--</option>
-                            {% for user in users %}
-                            <option value="{{user.id}}">{{user.display_name}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select id="subject_x4" name="subject[]" class="form-control">
-                            <option value="0">--Subject--</option>
-                            {% for user in users %}
-                            <option value="{{user.current_subject.id}}">{{user.current_subject.subject}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <select id="subject_x{{forloop.counter}}" name="subject[]" class="form-control subject">
+                        <option value="0">--Subject--</option>
+                        {% for user in users %}
+                        <option value="{{user.current_subject.id}}" class="subject subject_{{user.current_subject.id}}">
+                            {{user.current_subject.subject}}
+                        </option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
-            <button type="submit" class="btn btn-default">Match</button>
-        </form>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-success">Match</button>
+    </form>
     {% else %}
         All users must have their own subjects before make a match.
     {% endif %}

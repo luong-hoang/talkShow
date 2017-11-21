@@ -82,7 +82,46 @@
 
 // Overview page
 (function($) {
+    var selector = {
+        select: 'select.presenter, select.subject',
+        presenter: 'select.presenter', subject: 'select.subject'
+    };
+    var presenter_list = [], subject_list = [];
+
     $(document).ready(function() {
-        $('#date').datepicker({});
+//        initList();
+        initDatePicker();
+//        $(selector.select).on('change', disableSelected);
+//        console.log(presenter_list, subject_list);
     });
+
+    function initList() {
+        $(selector.presenter).first().find('option').each(function() {
+            var val = $(this).val();
+            if (val != 0) {
+                presenter_list.push($(this).val());
+            }
+        });
+        $(selector.subject).first().find('option').each(function() {
+            var val = $(this).val();
+            if (val != 0) {
+                subject_list.push($(this).val());
+            }
+        });
+    }
+
+    function initDatePicker() {
+        $('#date').datepicker({
+            minDate: new Date(),
+            dateFormat: 'yy-mm-dd'
+        });
+    }
+
+    function disableSelected() {
+        var $this   = $(this);
+        var $others = $(selector.select).not($this);
+        if ($this.val() == 0) {
+            $others
+        }
+    }
 })(jQuery);
