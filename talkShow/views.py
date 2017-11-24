@@ -115,7 +115,8 @@ def edit_subject(request, user_id):
 
 @login_required
 def statistics(request, user_id):
-    return render(request, 'talkShow/statistics.html', {'presenters': _hottest_presenter(), 'authors': _hottest_author()})
+    return render(request, 'talkShow/statistics.html',
+                  {'presenters': _hottest_presenter(), 'authors': _hottest_author()})
 
 
 @admin_required

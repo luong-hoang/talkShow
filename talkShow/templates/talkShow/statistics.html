@@ -1,13 +1,47 @@
-Hottest Presenter
-<ul>
-    {% for hot in presenters %}
-        <li>{{hot}}</li>
-    {% endfor %}
-</ul>
+{% extends "talkShow/base.html" %}
 
-Hottest Author
-<ul>
-    {% for hot in authors %}
-        <li>{{hot}}</li>
-    {% endfor %}
-</ul>
+{% block title %}Statistics{% endblock %}
+
+{% block content %}
+<div id="statistics" class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>Hottest Presenter</h2>
+            <ul>
+                {% for user in presenters %}
+                <li>
+                    <span class="{% if my_id == user.id %} me {% endif %}">{{user.display_name}}</span>
+                    <ul>
+                        {% for talk in user.talkshowsubject_set.all %}
+                        <li>
+                            <strong>{{talk.subject.subject}}</strong> - {{talk.subject.owner.display_name}}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-6">
+            <h2>Hottest Author</h2>
+            <ul>
+                {% for user in authors %}
+                <li>
+                    <span class="{% if my_id == user.id %} me {% endif %}">{{user.display_name}}</span>
+                    <ul>
+                        {% for subject in user.subject_set.all %}
+                        {% if subject.talked %}
+                        <li>
+                            <strong>{{subject.subject}}</strong> - {{subject.talkshowsubject_set.first.user.display_name}}
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}
