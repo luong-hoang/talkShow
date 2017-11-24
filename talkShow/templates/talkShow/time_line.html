@@ -1,10 +1,25 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'talkShow/css/bootstrap.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'talkShow/style.css' %}" />
+{% extends "talkShow/base.html" %}
 
-<span class="text-primary">This will show all talk show</span>
-<ul>
-    {% for talk_show in data %}
-        <li>{{talk_show}}</li>
-    {% endfor %}
-</ul>
+{% block title %}Time line{% endblock %}
+
+{% block content %}
+<div id="time_line" class="container">
+    <h1>All the shows</h1>
+    <ul>
+        {% for show in shows %}
+        <li>
+            {{show.date}}
+            <ul>
+                {% for talk in show.talkshowsubject_set.all %}
+                <li>
+                    <span class="{% if my_id == talk.user.id %} me {% endif %}">{{talk.user.display_name}}</span> -
+                    <strong>{{talk.subject.subject}}</strong>
+                    <span title="Suggested by">({{talk.subject.owner.display_name}})</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

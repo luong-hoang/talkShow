@@ -9,7 +9,7 @@
     <ul>
     {% for user in users %}
         <li>
-            {{ user.display_name }}:
+            <span class="{% if my_id == talk.user.id %} me {% endif %}">{{ user.display_name }}</span>:
             {% if user.current_subject %}
                 <span class="text-success">{{ user.current_subject.subject }}</span>
             {% else %}

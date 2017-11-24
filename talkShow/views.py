@@ -56,8 +56,8 @@ def logout(request):
 
 @login_required
 def time_line(request, user_id):
-    data = TalkShowSubject.objects.all()
-    return render(request, 'talkShow/time_line.html', {'data': data})
+    shows = TalkShow.objects.order_by('date')
+    return render(request, 'talkShow/time_line.html', {'shows': shows})
 
 
 @login_required

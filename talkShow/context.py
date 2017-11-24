@@ -12,6 +12,7 @@ def global_context(request):
         'current_url': current_url,
         'is_logged': False,
         'is_admin': False,
+        'my_id': 0
     }
 
     # Get user status context
@@ -23,15 +24,16 @@ def global_context(request):
             pass
         else:
             context['is_logged'] = True
+            context['my_id'] = user_id
             if user.super:
                 context['is_admin'] = True
 
     # Build navigation bar
     nav_predefined = [
-        {'name': 'time_line', 'url': ['', 'talked'], 'label': 'English time', 'admin': False},
-        {'name': 'overview', 'url': ['overview'], 'label': 'Overview', 'admin': True},
-        {'name': 'statistics', 'url': ['statistics'], 'label': 'Statistics', 'admin': False},
-        {'name': 'my_subjects', 'url': ['my-subjects'], 'label': 'My subjects', 'admin': False},
+        {'name': 'time_line', 'label': 'Time line', 'admin': False},
+        {'name': 'overview', 'label': 'This week', 'admin': True},
+        {'name': 'statistics', 'label': 'Statistics', 'admin': False},
+        {'name': 'my_subjects', 'label': 'My subjects', 'admin': False},
         # {'name': 'time_line', 'url': ['my-profile'], 'label': 'My profile', 'admin': False}
     ]
     nav_items = []
@@ -40,7 +42,7 @@ def global_context(request):
             url_name = 'talkShow:%s' % item['name']
             url = reverse(url_name)
             css_class = ''
-            if current_url in item['url']:
+            if current_url == item['name']:
                 css_class = 'active'
             nav_items.append({'url': url, 'label': item['label'], 'class': css_class})
 
