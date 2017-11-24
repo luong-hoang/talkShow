@@ -1,6 +1,7 @@
 nav.nav {
     background-color: #f3f0f0;
     margin-bottom: 20px;
+    padding-right: 0;
 }
 
 nav.nav .nav-link.active {
@@ -9,4 +10,8 @@ nav.nav .nav-link.active {
 
 .me {
     color: orange;
+}
+
+button {
+    cursor: pointer;
 }

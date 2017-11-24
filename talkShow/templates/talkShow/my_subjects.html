@@ -1,25 +1,30 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'talkShow/css/bootstrap.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'talkShow/style.css' %}" />
-<script type="text/javascript" src="{% static 'talkShow/js/jquery-3.2.1.js' %}"></script>
-<script type="text/javascript" src="{% static 'talkShow/js/main.js' %}"></script>
+{% extends "talkShow/base.html" %}
 
-<div class="helper">
-    {% csrf_token %}
-    <input type="hidden" name="endpoint" value="{% url 'talkShow:edit_subject' %}">
+{% block title %}My subjects{% endblock %}
+
+{% block content %}
+<div id="my_subjects" class="container">
+    <div class="col-6 offset-3">
+        <h1 class="text-center">My subjects</h1>
+        <div class="helper">
+            {% csrf_token %}
+            <input type="hidden" name="endpoint" value="{% url 'talkShow:edit_subject' %}">
+        </div>
+
+        <ul>
+            {% for subject in subjects %}
+                {% include './partials/subject_item.html' with subject=subject %}
+            {% endfor %}
+        </ul>
+
+        {% if allow_add_new %}
+        <div class="add_block">
+            <button type="button" class="edit_subject btn btn-default">Add subject for this week</button>
+            <input class="form-control change d-none" placeholder="New subject">
+        </div>
+        {% endif %}
+
+        <span id="error" class="text-danger"></span>
+    </div>
 </div>
-<span class="text-primary">My subjects</span>
-<ul>
-    {% for subject in subjects %}
-        {% include './partials/subject_item.html' with subject=subject %}
-    {% endfor %}
-</ul>
-
-{% if allow_add_new %}
-<div class="add_block">
-    <button type="button" class="edit_subject btn btn-default">Add subject for this week</button>
-    <input class="form-control change d-none" placeholder="New subject">
-</div>
-{% endif %}
-
-<span id="error" class="text-danger"></span>
+{% endblock content %}

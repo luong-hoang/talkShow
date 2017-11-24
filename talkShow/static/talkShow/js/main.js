@@ -54,6 +54,7 @@
     }
 
     function edit_subject_ajax(subject, id, callback) {
+        $('#error').text('');
         $.ajax({
             url: endpoint,
             dataType: 'json',
@@ -65,7 +66,7 @@
                         callback(result);
                     }
                 } else {
-                    alert(result.msg);
+                    $('#error').text(result.msg);
                 }
             }
         });
