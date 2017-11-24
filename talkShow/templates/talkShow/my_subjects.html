@@ -5,7 +5,7 @@
 {% block content %}
 <div id="my_subjects" class="container">
     <div class="col-6 offset-3">
-        <h1 class="text-center">My subjects</h1>
+        <h1 class="">My subjects</h1>
         <div class="helper">
             {% csrf_token %}
             <input type="hidden" name="endpoint" value="{% url 'talkShow:edit_subject' %}">
@@ -18,7 +18,7 @@
         </ul>
 
         {% if allow_add_new %}
-        <div class="add_block">
+        <div class="add_block text-center">
             <button type="button" class="edit_subject btn btn-default">Add subject for this week</button>
             <input class="form-control change d-none" placeholder="New subject">
         </div>

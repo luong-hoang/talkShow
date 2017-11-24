@@ -21,8 +21,9 @@ class User(models.Model):
         return True
 
     # Encrypt password in database
-    def save(self, *args, **kwargs):
-        self.password = Tools.md5(self.password)
+    def save(self, update_pass=True, *args, **kwargs):
+        if update_pass:
+            self.password = Tools.md5(self.password)
         super(User, self).save(*args, **kwargs)
 
     def __str__(self):

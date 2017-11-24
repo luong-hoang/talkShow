@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^logout', views.logout, name='logout'),
     url(r'^my-subjects', views.my_subjects, name='my_subjects'),
     url(r'^edit-subject', views.edit_subject, name='edit_subject'),
+    url(r'^profile', views.my_profile, name='my_profile'),
     url(r'^statistics', views.statistics, name='statistics'),
     # Admin
     url(r'^overview', views.overview, name='overview'),

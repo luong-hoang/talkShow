@@ -181,6 +181,43 @@ def overview(request, user):
     return render(request, 'talkShow/admin/overview.html', {'users': users, 'can_match': can_match})
 
 
+@login_required
+def my_profile(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    if request.method == 'POST':
+        # Validate
+        display_name = request.POST['display_name'].strip()
+        password = request.POST['password']
+        confirm_pass = request.POST['confirm_pass']
+
+        # Check duplicate display_name
+        if display_name != '':
+            other_users = User.objects.exclude(pk=user_id)
+            for other in other_users:
+                if other.display_name == display_name:
+                    return render(request, 'talkShow/my_profile.html',
+                                  {'user': user, 'error': 'Please choose another name.'})
+            user.display_name = display_name
+
+        # Check password
+        update_pass = False
+        if len(password) > 0 and len(confirm_pass) > 0:
+            if len(password) < 6 or len(confirm_pass) < 6:
+                return render(request, 'talkShow/my_profile.html',
+                              {'user': user, 'error': 'Password needs longer than 6 characters.'})
+            if password != confirm_pass:
+                return render(request, 'talkShow/my_profile.html',
+                              {'user': user, 'error': 'Password and confirm password not matched.'})
+            update_pass = True
+            user.password = password
+
+        # Save profile
+        user.save(update_pass)
+        return render(request, 'talkShow/my_profile.html', {'user': user, 'success': 'Update successfully.'})
+
+    return render(request, 'talkShow/my_profile.html', {'user': user})
+
+
 #@admin_required
 #def auto_roll(request, user, roll_number):
 #    available_subjects = Subject.objects.filter(talkshowsubject=None)

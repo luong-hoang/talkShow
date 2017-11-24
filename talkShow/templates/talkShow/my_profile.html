@@ -1,0 +1,39 @@
+{% extends "talkShow/base.html" %}
+
+{% block title %}My profile{% endblock %}
+
+{% block content %}
+<div id="my_profile" class="container">
+    <div class="col-6 offset-3">
+        <h1>Profile</h1>
+        <form method="post">
+            {% if error %}
+            <span id="error" class="text-danger">{{error}}</span>
+            {% endif %}
+            {% if success %}
+            <span id="success" class="text-success">{{success}}</span>
+            {% endif %}
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" value="{{user.email}}" disabled>
+            </div>
+            <div class="form-group">
+                <label for="display_name">Display name</label>
+                <input type="text" class="form-control" id="display_name" name="display_name" value="{{user.display_name}}">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirm_pass">Confirm password</label>
+                <input type="password" class="form-control" id="confirm_pass" name="confirm_pass">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-default" href="{% url 'talkShow:logout' %}">Logout</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

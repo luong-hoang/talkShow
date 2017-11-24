@@ -34,7 +34,7 @@ def global_context(request):
         {'name': 'overview', 'label': 'This week', 'admin': True},
         {'name': 'statistics', 'label': 'Statistics', 'admin': False},
         {'name': 'my_subjects', 'label': 'My subjects', 'admin': False},
-        # {'name': 'time_line', 'url': ['my-profile'], 'label': 'My profile', 'admin': False}
+        {'name': 'my_profile', 'label': 'My profile', 'admin': False}
     ]
     nav_items = []
     for item in nav_predefined:
