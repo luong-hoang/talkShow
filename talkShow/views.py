@@ -261,14 +261,14 @@ def _hottest_presenter():
 def _hottest_author():
     cursor = connection.cursor()
     join_query = 'SELECT tss.`id`, tss.`subject_id`, s.`owner_id` ' \
-                      'FROM `talkShow_talkshowsubject` tss ' \
-                      'LEFT JOIN `talkShow_subject` s ON (tss.`subject_id` = s.`id`)'
+                 'FROM `talkShow_talkshowsubject` tss ' \
+                 'LEFT JOIN `talkShow_subject` s ON (tss.`subject_id` = s.`id`)'
 
     frequency_query = 'SELECT `owner_id`, COUNT(`owner_id`) AS `total` ' \
                       'FROM (' + join_query + ') ' \
                       'GROUP BY `owner_id` ORDER BY `total` DESC'
 
-    max_query = 'SELECT MAX(`owner_id`) FROM (' + frequency_query + ') AS `dummy`'
+    max_query = 'SELECT MAX(`total`) FROM (' + frequency_query + ') AS `dummy`'
 
     # [(owner_id, frequency), ...]
     frequency_result = cursor.execute(frequency_query).fetchall()
