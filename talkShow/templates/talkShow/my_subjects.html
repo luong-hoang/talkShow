@@ -6,6 +6,11 @@
 <div id="my_subjects" class="container">
     <div class="col-6 offset-3">
         <h1 class="">My subjects</h1>
+
+        {% if allow_add_new %}
+        <span class="text-warning">You currently don't have any subject for this week. Add one now. </span>
+        {% endif %}
+
         <div class="helper">
             {% csrf_token %}
             <input type="hidden" name="endpoint" value="{% url 'talkShow:edit_subject' %}">
