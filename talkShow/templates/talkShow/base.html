@@ -10,6 +10,14 @@
 </head>
 
 <body>
+    {% if is_logged %}
+        <nav class="nav nav-pills nav-justified container">
+            {% for nav_item in nav_items %}
+            <a class="nav-item nav-link {{nav_item.class}}" href="{{nav_item.url}}">{{nav_item.label}}</a>
+            {% endfor %}
+        </nav>
+    {% endif %}
+
     {% block content %}{% endblock %}
 
     {% block js %}

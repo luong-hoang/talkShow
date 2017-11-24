@@ -9,9 +9,11 @@
     <ul>
     {% for user in users %}
         <li>
-            {{ user.display_name }}
+            {{ user.display_name }}:
             {% if user.current_subject %}
-                <span>{{ user.current_subject.subject }}</span>
+                <span class="text-success">{{ user.current_subject.subject }}</span>
+            {% else %}
+                <span class="text-danger">Missing</span>
             {% endif %}
         </li>
     {% endfor %}
