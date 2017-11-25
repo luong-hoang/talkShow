@@ -1,0 +1,83 @@
+[
+  {
+    "model": "talkShow.TalkShowSubject",
+    "pk": 1,
+    "fields": {
+      "talk_show": 1,
+      "subject": 1,
+      "user": 4
+    }
+  },
+  {
+    "model": "talkShow.TalkShowSubject",
+    "pk": 2,
+    "fields": {
+      "talk_show": 1,
+      "subject": 2,
+      "user": 6
+    }
+  },
+  {
+    "model": "talkShow.TalkShowSubject",
+    "pk": 3,
+    "fields": {
+      "talk_show": 2,
+      "subject": 3,
+      "user": 14
+    }
+  },
+  {
+    "model": "talkShow.TalkShowSubject",
+    "pk": 4,
+    "fields": {
+      "talk_show": 3,
+      "subject": 4,
+      "user": 3
+    }
+  },
+  {
+    "model": "talkShow.TalkShowSubject",
+    "pk": 5,
+    "fields": {
+      "talk_show": 3,
+      "subject": 5,
+      "user": 2
+    }
+  },
+  {
+    "model": "talkShow.TalkShowSubject",
+    "pk": 6,
+    "fields": {
+      "talk_show": 3,
+      "subject": 6,
+      "user": 17
+    }
+  },
+  {
+    "model": "talkShow.TalkShowSubject",
+    "pk": 7,
+    "fields": {
+      "talk_show": 4,
+      "subject": 7,
+      "user": 12
+    }
+  },
+  {
+    "model": "talkShow.TalkShowSubject",
+    "pk": 8,
+    "fields": {
+      "talk_show": 4,
+      "subject": 8,
+      "user": 3
+    }
+  },
+  {
+    "model": "talkShow.TalkShowSubject",
+    "pk": 9,
+    "fields": {
+      "talk_show": 4,
+      "subject": 9,
+      "user": 10
+    }
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "model": "talkShow.TalkShow",
+    "pk": 1,
+    "fields": {
+      "date": "2017-11-02"
+    }
+  },
+  {
+    "model": "talkShow.TalkShow",
+    "pk": 2,
+    "fields": {
+      "date": "2017-11-09"
+    }
+  },
+  {
+    "model": "talkShow.TalkShow",
+    "pk": 3,
+    "fields": {
+      "date": "2017-11-16"
+    }
+  },
+  {
+    "model": "talkShow.TalkShow",
+    "pk": 4,
+    "fields": {
+      "date": "2017-11-23"
+    }
+  }
+]

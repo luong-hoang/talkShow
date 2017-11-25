@@ -1,0 +1,92 @@
+[
+  {
+    "model": "talkShow.Subject",
+    "pk": 1,
+    "fields": {
+      "subject": "Pencil",
+      "date_added": "2017-11-02T00:00:00+00:00",
+      "date_modified": "2017-11-02T00:00:00+00:00",
+      "owner": 12
+    }
+  },
+  {
+    "model": "talkShow.Subject",
+    "pk": 2,
+    "fields": {
+      "subject": "Battery charger",
+      "date_added": "2017-11-02T00:00:00+00:00",
+      "date_modified": "2017-11-02T00:00:00+00:00",
+      "owner": 13
+    }
+  },
+  {
+    "model": "talkShow.Subject",
+    "pk": 3,
+    "fields": {
+      "subject": "Workplace",
+      "date_added": "2017-11-09T00:00:00+00:00",
+      "date_modified": "2017-11-09T00:00:00+00:00",
+      "owner": 5
+    }
+  },
+  {
+    "model": "talkShow.Subject",
+    "pk": 4,
+    "fields": {
+      "subject": "Breakfast",
+      "date_added": "2017-11-16T00:00:00+00:00",
+      "date_modified": "2017-11-16T00:00:00+00:00",
+      "owner": 11
+    }
+  },
+  {
+    "model": "talkShow.Subject",
+    "pk": 5,
+    "fields": {
+      "subject": "Calendar",
+      "date_added": "2017-11-16T00:00:00+00:00",
+      "date_modified": "2017-11-16T00:00:00+00:00",
+      "owner": 7
+    }
+  },
+  {
+    "model": "talkShow.Subject",
+    "pk": 6,
+    "fields": {
+      "subject": "Traffic",
+      "date_added": "2017-11-16T00:00:00+00:00",
+      "date_modified": "2017-11-16T00:00:00+00:00",
+      "owner": 1
+    }
+  },
+  {
+    "model": "talkShow.Subject",
+    "pk": 7,
+    "fields": {
+      "subject": "HCM City",
+      "date_added": "2017-11-23T00:00:00+00:00",
+      "date_modified": "2017-11-23T00:00:00+00:00",
+      "owner": 12
+    }
+  },
+  {
+    "model": "talkShow.Subject",
+    "pk": 8,
+    "fields": {
+      "subject": "Baby",
+      "date_added": "2017-11-23T00:00:00+00:00",
+      "date_modified": "2017-11-23T00:00:00+00:00",
+      "owner": 7
+    }
+  },
+  {
+    "model": "talkShow.Subject",
+    "pk": 9,
+    "fields": {
+      "subject": "Coconut",
+      "date_added": "2017-11-23T00:00:00+00:00",
+      "date_modified": "2017-11-23T00:00:00+00:00",
+      "owner": 13
+    }
+  }
+]

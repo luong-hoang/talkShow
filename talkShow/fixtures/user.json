@@ -1,0 +1,156 @@
+[
+  {
+    "model": "talkShow.User",
+    "pk": 1,
+    "fields": {
+      "email": "tran.pham@ceresolutions.com",
+      "display_name": "tran.pham@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 2,
+    "fields": {
+      "email": "dat.nguyen@ceresolutions.com",
+      "display_name": "dat.nguyen@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 3,
+    "fields": {
+      "email": "nxthuy@ceresolutions.com",
+      "display_name": "nxthuy@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 4,
+    "fields": {
+      "email": "nkgiang@ceresolutions.com",
+      "display_name": "nkgiang@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 5,
+    "fields": {
+      "email": "luong.hoang@ceresolutions.com",
+      "display_name": "luong.hoang@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 6,
+    "fields": {
+      "email": "nkyen@ceresolutions.com",
+      "display_name": "nkyen@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad",
+      "super": 1
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 7,
+    "fields": {
+      "email": "vddinh@ceresolutions.com",
+      "display_name": "vddinh@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 8,
+    "fields": {
+      "email": "han.dang@ceresolutions.com",
+      "display_name": "han.dang@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 9,
+    "fields": {
+      "email": "tien.le@ceresolutions.com",
+      "display_name": "tien.le@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 10,
+    "fields": {
+      "email": "khoa.nguyen@ceresolutions.com",
+      "display_name": "khoa.nguyen@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 11,
+    "fields": {
+      "email": "van.hoang@ceresolutions.com",
+      "display_name": "van.hoang@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 12,
+    "fields": {
+      "email": "bttruc@ceresolutions.com",
+      "display_name": "bttruc@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 13,
+    "fields": {
+      "email": "ththao@ceresolutions.com",
+      "display_name": "ththao@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 14,
+    "fields": {
+      "email": "dkquang@ceresolutions.com",
+      "display_name": "dkquang@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 15,
+    "fields": {
+      "email": "dpnhi@ceresolutions.com",
+      "display_name": "dpnhi@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 16,
+    "fields": {
+      "email": "phong.truong@ceresolutions.com",
+      "display_name": "phong.truong@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  },
+  {
+    "model": "talkShow.User",
+    "pk": 17,
+    "fields": {
+      "email": "chau.bui@ceresolutions.com",
+      "display_name": "chau.bui@ceresolutions.com",
+      "password": "25d55ad283aa400af464c76d713c07ad"
+    }
+  }
+]
