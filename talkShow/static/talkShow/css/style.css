@@ -15,3 +15,10 @@ nav.nav .nav-link.active {
 button {
     cursor: pointer;
 }
+
+#main_content {
+    min-height: calc(100vh - 40px);
+}
+footer {
+    font-size: small;
+}

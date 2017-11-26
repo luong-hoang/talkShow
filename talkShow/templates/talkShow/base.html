@@ -10,20 +10,26 @@
 </head>
 
 <body>
+    <div id="main_content">
+        {% if is_logged %}
+            <nav class="nav nav-pills nav-justified container">
+                {% for nav_item in nav_items %}
+                <a class="nav-item nav-link {{nav_item.class}}" href="{{nav_item.url}}">{{nav_item.label}}</a>
+                {% endfor %}
+            </nav>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+
+        {% block js %}
+            <script type="text/javascript" src="{% static 'talkShow/js/jquery-3.2.1.js' %}"></script>
+            <script type="text/javascript" src="{% static 'talkShow/js/jquery-ui.js' %}"></script>
+            <script type="text/javascript" src="{% static 'talkShow/js/main.js' %}"></script>
+        {% endblock %}
+    </div>
+
     {% if is_logged %}
-        <nav class="nav nav-pills nav-justified container">
-            {% for nav_item in nav_items %}
-            <a class="nav-item nav-link {{nav_item.class}}" href="{{nav_item.url}}">{{nav_item.label}}</a>
-            {% endfor %}
-        </nav>
+    <footer class="text-center">Source code available in <a href="https://github.com/luong-hoang/talkShow">Github</a></footer>
     {% endif %}
-
-    {% block content %}{% endblock %}
-
-    {% block js %}
-        <script type="text/javascript" src="{% static 'talkShow/js/jquery-3.2.1.js' %}"></script>
-        <script type="text/javascript" src="{% static 'talkShow/js/jquery-ui.js' %}"></script>
-        <script type="text/javascript" src="{% static 'talkShow/js/main.js' %}"></script>
-    {% endblock %}
 </body>
 </html>
